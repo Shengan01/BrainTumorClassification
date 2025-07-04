@@ -1,7 +1,6 @@
-# BrainTumorClassification
+BrainTumorClassification
 
-This project implements a deep learning pipeline for brain tumor classification using a hybrid architecture that combines Convolutional Neural Networks (CNNs) with Transformer Encoders. It also compares performance against ViT and ResNet-based baselines.
-
+This project implements a deep learning pipeline for brain tumor classification using a hybrid architecture that combines Convolutional Neural Networks (CNNs) with Transformer Encoders. It also compares performance against several state-of-the-art models like ViT (Vision Transformer), ResNet, DenseNet, RegNet, EfficientNet, ConvNeXt, Swin Transformer, and MaxViT.
 📁 Dataset
 
     Source: Kaggle - Brain Tumor MRI Dataset
@@ -10,32 +9,45 @@ This project implements a deep learning pipeline for brain tumor classification 
 
     Split: Training, Validation (10%), and Testing
 
-Dataset is automatically downloaded using kagglehub:
-```
+The dataset is automatically downloaded using kagglehub:
+
 import kagglehub
 path = kagglehub.dataset_download("masoudnickparvar/brain-tumor-mri-dataset")
-```
 
 🧠 Model Architectures
 🔷 Hybrid Model (Custom)
 
     CNN Tokenizer with CBAM (Channel + Spatial Attention)
 
-    Transformer Encoder (multi-head attention + positional embedding)
+    Transformer Encoder: Multi-head attention + positional embedding
 
     Attention Pooling Head
 
-    Final linear classifier
+    Final Linear Classifier
 
-🔶 ViT & ResNet Baselines
+🔶 Vision Transformer (ViT) & ResNet Baselines
 
-    Images converted to 3-channel
+    Images: Converted to 3-channel format
 
-    Loaded using torchvision/timm pretrained models
+    Models: Pretrained on ImageNet, using torchvision/timm for ViT, and ResNet-based architectures.
 
-    Compared against custom hybrid model
+    Compared against: Custom Hybrid model, as well as other models below.
 
+🔶 Other Models (Pretrained)
 
+    DenseNet121
+
+    RegNetY-032
+
+    EfficientNetV2
+
+    ConvNeXt
+
+    Swin Transformer
+
+    MaxViT
+
+All models are evaluated against the same dataset for a fair comparison.
 🏋️‍♂️ Training Details
 
     Batch Size: 64
@@ -44,40 +56,59 @@ path = kagglehub.dataset_download("masoudnickparvar/brain-tumor-mri-dataset")
 
     Learning Rate: 1e-4
 
-    Optim: Adam
+    Optimizer: AdamW (for all models)
 
-    Scheduler: Cosine Annealing
+    Scheduler: Cosine Annealing with T_max=200
 
-    Loss: CrossEntropy with label smoothing
+    Loss Function: CrossEntropy Loss with label smoothing (0.01)
 
-    Mixed Precision: Enabled via torch.amp
+    Mixed Precision: Enabled via torch.amp for faster training
 
-    Early Stopping: Patience = 25 epochs
-    
+    Early Stopping: Patience = 15 epochs (triggered based on validation loss)
+
 🎛️ Data Augmentation
 
-Different pipelines are used for:
+    Hybrid model: Grayscale 1-channel input
 
-    Hybrid model: grayscale 1-channel input
+    ViT/ResNet models: Grayscale expanded to 3-channel
 
-    ViT/ResNet models: grayscale expanded to 3-channel
+    Augmentations:
 
-Augmentations include:
+        Random crops and flips
 
-    Random crops and flips
+        Rotation and affine transformations
 
-    Rotation and affine transformations
+        Gaussian noise and blur
 
-    Gaussian noise and blur
+        Color jitter
 
-    Color jitter
-
-    Random erasing
+        Random erasing
 
 📊 Evaluation
+Metrics:
 
-    Metrics: Accuracy, Loss
+    Accuracy: Primary metric for model evaluation.
 
-    Best model saved based on validation loss
+    Additional Metrics:
 
-    Test performance reported with accuracy
+        Precision (Macro Avg.)
+
+        Recall (Macro Avg.)
+
+        F1-Score (Macro Avg.)
+
+        AUC (Area Under the Curve)
+
+        Confusion Matrix: To better understand misclassifications
+
+Model Selection:
+
+    The best model is selected based on the lowest validation loss during training.
+
+    Test performance is reported with accuracy and additional metrics (precision, recall, F1-score, AUC).
+
+Test Results:
+
+    All models are evaluated using a common test set.
+
+    Results include detailed performance metrics for each model.
