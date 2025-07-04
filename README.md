@@ -1,6 +1,7 @@
 BrainTumorClassification
 
 This project implements a deep learning pipeline for brain tumor classification using a hybrid architecture that combines Convolutional Neural Networks (CNNs) with Transformer Encoders. It also compares performance against several state-of-the-art models like ViT (Vision Transformer), ResNet, DenseNet, RegNet, EfficientNet, ConvNeXt, Swin Transformer, and MaxViT.
+
 📁 Dataset
 
     Source: Kaggle - Brain Tumor MRI Dataset
