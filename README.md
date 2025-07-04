@@ -11,9 +11,10 @@ This project implements a deep learning pipeline for brain tumor classification 
     Split: Training, Validation (10%), and Testing
 
 The dataset is automatically downloaded using kagglehub:
-
+```
 import kagglehub
 path = kagglehub.dataset_download("masoudnickparvar/brain-tumor-mri-dataset")
+```
 
 🧠 Model Architectures
 🔷 Hybrid Model (Custom)
