@@ -328,77 +328,6 @@ Class Distribution (Test Set):
 - No Tumor:  405 images (30.9%)
 - Pituitary: 300 images (22.9%)
 ```
-
----
-
-## How to Use the Model
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Shengan01/BrainTumorClassification.git
-cd BrainTumorClassification
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install torch torchvision torchaudio
-pip install timm scikit-learn pandas numpy matplotlib seaborn opencv-python pytorch-grad-cam shap
-```
-
-### Quick Classification
-
-```python
-import torch
-from PIL import Image
-import torchvision.transforms as transforms
-
-# Load pre-trained model
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = HybridTumorClassifier(in_channels=1, num_classes=4)
-model.load_state_dict(torch.load('hybrid_model.pth', map_location=device))
-model = model.to(device)
-model.eval()
-
-# Prepare image
-img = Image.open('mri_scan.jpg').convert('L')
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=0.5, std=0.5)
-])
-
-# Get prediction
-with torch.no_grad():
-    img_tensor = transform(img).unsqueeze(0).to(device)
-    logits = model(img_tensor)
-    probabilities = torch.softmax(logits, dim=1)
-    prediction_idx = torch.argmax(logits, dim=1).item()
-
-# Display results
-class_names = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
-print(f"Predicted: {class_names[prediction_idx]}")
-print(f"Confidence: {probabilities[0, prediction_idx]:.1%}")
-```
-
-### ⚠️ Critical: Understanding Model Output
-
-**The model returns raw logits, NOT probabilities:**
-
-```python
-# ❌ WRONG - These are NOT probabilities!
-output = model(image)  # Shape: [1, 4]
-prob = output[0, 0].item()  # Range can be negative or >1!
-
-# ✅ RIGHT - Always apply softmax
-logits = model(image)  # Raw model output
-probabilities = torch.softmax(logits, dim=1)  # Convert to probabilities
-prob = probabilities[0, 0].item()  # Now in range [0, 1]
-```
-
 ---
 
 ## Clinical Applications and Impact
@@ -422,39 +351,14 @@ Time per diagnosis:      1.17 ms (Real-time capable)
 
 ---
 
-## Future Directions
+## Summary
 
-### Immediate (Next 3 months)
-- Meningioma specialization with ensemble methods
-- Model compression via knowledge distillation
-- Quantization for edge devices
+Successfully demonstrated that **intelligent architecture design can compete with brute-force scaling**.
 
-### Medium-Term (3-6 months)
-- Clinical validation studies with radiologists
-- 3D volumetric MRI analysis
-- PACS integration for hospital deployment
-
-### Long-Term (6-12 months)
-- FDA/CE regulatory approval
-- Federated learning across hospitals
-- Multimodal analysis (MRI + CT + clinical data)
-
----
-
-## Summary: The Innovation
-
-We've successfully demonstrated that **intelligent architecture design can compete with brute-force scaling**.
-
-By combining CNNs and Transformers thoughtfully, we created a model that:
+By combining CNNs and Transformers thoughtfully, I created a model that:
 - **Matches** state-of-the-art accuracy (97.18%)
 - **Exceeds** in efficiency (32× smaller than ViT)
 - **Surpasses** in speed (8× faster inference)
 - **Enables** clinical deployment
 - **Respects** resource constraints
 
----
-
-**Created**: November 11, 2025  
-**Version**: 1.0  
-**Status**: ✅ Publication Ready | Clinical Grade | Production Tested  
-**Completeness**: 100% - Full story from problem to solution
