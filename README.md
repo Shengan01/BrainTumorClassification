@@ -263,8 +263,6 @@ This visualization shows the model in action on real MRI scans:
 
 ---
 
-## The Numbers: Technical Deep Dive
-
 ### Why This Model Size?
 
 ![Efficiency Comparison](visualizations/efficiency_percentage_comparison.png)
@@ -278,9 +276,9 @@ ResNet-50:          23.5M (+780%)      8.21G (+278%)
 Swin Transformer:   87.9M (+3,193%)    15.47G (+613%)
 ```
 
-**The insight**: You don't need massive models to achieve clinical-grade accuracy. Our 2.67M parameter model proves that **smart architecture design beats brute-force scaling**.
+**The insight**: You don't need massive models to achieve clinical-grade accuracy. Mine 2.67M parameter model proves that **smart architecture design beats brute-force scaling**.
 
-### Training Journey
+### Training
 
 The model was trained with careful attention to generalization:
 - **Batch Size**: 64 (balanced gradient estimates)
@@ -293,7 +291,7 @@ Result: Clean convergence with validation metrics closely tracking training metr
 
 ---
 
-## Scaling and Deployment: From Lab to Clinic
+## Scaling and Deployment:
 
 ### Real-World Impact
 
