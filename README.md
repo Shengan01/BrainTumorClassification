@@ -1,4 +1,4 @@
-# Brain Tumor Classification: A CNN-Transformer Hybrid Journey
+# Brain Tumor Classification: A CNN-Transformer Hybrid Model
 
 ## The Story
 
@@ -6,11 +6,11 @@ In the intersection of medical imaging and deep learning, we faced a critical ch
 
 Traditional approaches presented a dilemma. Large transformer models like Vision Transformers could achieve high accuracy but required massive computational resources—85.8 million parameters and 17.6 GMACs of computing power. Meanwhile, efficient CNNs were lightweight but struggled to capture the complex, long-range relationships in medical images.
 
-**The Solution**: A novel **Hybrid CNN-Transformer Architecture** that combines the best of both worlds.
+**The Solution**: A **Hybrid CNN-Transformer Architecture** that combines the best of both worlds.
 
 ---
 
-## The Problem We're Solving
+## The Problem
 
 Brain tumors come in four distinct types, each requiring different treatment strategies:
 
@@ -29,11 +29,11 @@ We set out to build an AI solution that could **assist radiologists** by providi
 
 ---
 
-## Our Approach: The Hybrid Architecture
+## Approach: The Hybrid Architecture
 
 ### Why Hybrid?
 
-Instead of choosing between CNNs and Transformers, we engineered a **synergistic combination**:
+Instead of choosing between CNNs and Transformers, I decided engineer a solution that will utilize the strengths of both approaches:
 
 ![Hybrid Architecture](visualizations/hybrid_architecture.png)
 
@@ -45,23 +45,11 @@ Instead of choosing between CNNs and Transformers, we engineered a **synergistic
 
 **Why this works**: CNNs excel at learning local spatial patterns (the "texture" of tumors), while Transformers excel at understanding global context (relationships between different regions of the brain). Together, they provide comprehensive understanding.
 
-### The Technical Innovation
-
-The model returns **raw logits** (no activation function) for numerical stability during training with CrossEntropyLoss. This is standard practice in PyTorch but important to understand when using the model:
-
-```python
-# During inference, always apply softmax:
-logits = model(image)                    # Raw output from model
-probabilities = torch.softmax(logits, dim=1)  # Convert to probabilities
-```
-
----
-
-## The Results: Exceeding Expectations
+## The Results
 
 ### How It Compares
 
-We trained and evaluated 8 different architectures on the same dataset with identical hyperparameters:
+Trained and evaluated 8 different architectures on the same dataset with identical hyperparameters:
 
 ![Model Comparison](visualizations/model_comparison_4panel.png)
 
@@ -73,7 +61,7 @@ We trained and evaluated 8 different architectures on the same dataset with iden
 | 🥈 | ResNet-50 | 98.55% | 23.5M | 2.14ms | Balanced |
 | 🥉 | **Hybrid** | **97.18%** | **2.67M** | **1.17ms** | **Best efficiency** ⭐ |
 
-**The Trade-off Story**: Our Hybrid model sacrifices just **1.45% accuracy** compared to the best model, but gains:
+Hybrid model sacrifices just **1.45% accuracy** compared to the best model, but gains:
 - **32× fewer parameters** than Swin Transformer
 - **8× faster inference** than ViT Base
 - **88.8% fewer FLOPs** (floating point operations)
@@ -83,20 +71,18 @@ For clinical settings, especially in resource-constrained environments, this tra
 
 ---
 
-## Deep Dive: How Well Does It Really Perform?
+## How Well Does It Really Perform?
 
-### Per-Class Performance: The Story of Challenges
+### Per-Class Performance
 
 ![Per-Class Metrics](visualizations/per_class_metrics_hybrid.png)
 
-The detailed breakdown reveals an interesting story:
-
 ```
-Class          Accuracy    Challenge Level
-Glioma         97.33%      ✅ Easy - Distinctive features
-Meningioma     93.46%      ⚠️  Hard - Similar to other tumors  
-No Tumor       98.52%      ✅ Easiest - Clearly different
-Pituitary      98.00%      ✅ Easy - Small but distinct
+Class          Accuracy
+Glioma         97.33%
+Meningioma     93.46%  
+No Tumor       98.52%
+Pituitary      98.00%
 ```
 
 **The Meningioma Challenge**: Why does our model struggle most with meningiomas? 
@@ -131,13 +117,13 @@ The probability calibration analysis shows:
 
 ---
 
-## The Inference Story: Real-Time Diagnosis
+## The Inference: Real-Time Diagnosis
 
 ### Speed Analysis
 
 ![Efficiency Scatter](visualizations/efficiency_comparison_scatter.png)
 
-One of our model's superpowers is **speed**:
+One of model's superpowers is **speed**:
 
 ```
 Single image:           1.17 milliseconds
@@ -145,10 +131,10 @@ Single image:           1.17 milliseconds
 Throughput:             854 images per second
 
 What does this mean?
-- 🏥 Real-time screening in clinical workflows
-- 📱 Edge device deployment (mobile, tablets)
-- 💻 Lightweight server requirements
-- 🌍 Telemedicine in low-bandwidth areas
+- Real-time screening in clinical workflows
+- Edge device deployment (mobile, tablets)
+- Lightweight server requirements
+- Telemedicine in low-bandwidth areas
 ```
 
 **Timing Breakdown** (where does the 1.17ms go?):
@@ -167,7 +153,7 @@ This breakdown shows our architecture is well-balanced—no single component is 
 
 ![Training Curves](visualizations/training_curves_hybrid.png)
 
-We performed **3-fold cross-validation** to ensure our results aren't flukes:
+Performed **3-fold cross-validation** to ensure our results aren't flukes:
 
 ```
 Metric            Fold 1    Fold 2    Fold 3    Variation
@@ -180,7 +166,7 @@ AUC               0.9974    0.9976    0.9976    ±0.0001
 
 **Coefficient of Variation: <0.2%**
 
-This tells us something powerful: **The model is incredibly stable and reproducible.** The differences between folds are negligible—meaning the results will hold up with new data.
+This tells us something powerful: **The model is stable and reproducible.** The differences between folds are negligible—meaning the results will hold up with new data.
 
 ### The Confusion Matrix Story
 
