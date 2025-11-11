@@ -282,19 +282,19 @@ Result: Clean convergence with validation metrics closely tracking training metr
 The efficiency gains translate to real-world benefits:
 
 **Mobile/Edge Deployment**:
-- ✅ Runs on modern smartphones and tablets
-- ✅ Works offline (no cloud dependency)
-- ✅ Instant results for screening
+- Runs on modern smartphones and tablets
+- Works offline (no cloud dependency)
+- Instant results for screening
 
 **Server Deployment**:
-- ✅ Process 854+ images per second
-- ✅ Minimal GPU memory footprint
-- ✅ Scales to batch processing
+- Process 854+ images per second
+- Minimal GPU memory footprint
+- Scales to batch processing
 
 **Clinical Integration**:
-- ✅ Real-time decision support for radiologists
-- ✅ Fast enough to integrate into screening workflows
-- ✅ Lightweight enough for telemedicine
+- Real-time decision support for radiologists
+- Fast enough to integrate into screening workflows
+- Lightweight enough for telemedicine
 
 ### Dataset and Training Story
 
