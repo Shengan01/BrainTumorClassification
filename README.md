@@ -1,7 +1,5 @@
 # Brain Tumor Classification: A CNN-Transformer Hybrid Model
 
-## The Story
-
 In the intersection of medical imaging and deep learning, we faced a critical challenge: **How do we build a brain tumor classifier that is both accurate AND efficient?**
 
 Traditional approaches presented a dilemma. Large transformer models like Vision Transformers could achieve high accuracy but required massive computational resources—85.8 million parameters and 17.6 GMACs of computing power. Meanwhile, efficient CNNs were lightweight but struggled to capture the complex, long-range relationships in medical images.
