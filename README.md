@@ -153,6 +153,8 @@ The transformer encoder consists of standard encoder layers with:
 
 TinyHybrid is our ultra-efficient variant designed for resource-constrained environments.
 
+![TinyHybrid Architecture](figures/tinyhybrid_architecture.png)
+
 #### Architecture Specifications
 
 | Component | Specification |
