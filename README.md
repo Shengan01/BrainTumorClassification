@@ -224,6 +224,7 @@ We compare our proposed models against state-of-the-art architectures including 
 | **Hybrid** | **97.10%** | **0.993** | **1.07** | **0.88** |
 | **Hybrid: Optimized** | **97.48%** | **0.996** | **1.07** | **0.88** |
 | **TinyHybrid** | **94.58%** | **0.992** | **0.039** | **0.047** |
+| **Tiny: No All Attn** | **96.49%** | **0.995** | **0.039** | **0.047** |
 | MobileViT | 98.70% | 0.998 | 4.93 | 1.42 |
 | MobileNetV3 | 97.25% | 0.998 | 4.18 | 0.22 |
 | Swin Transformer | 99.31% | 0.999 | 86.68 | 15.17 |
@@ -236,9 +237,9 @@ We compare our proposed models against state-of-the-art architectures including 
 
 #### Key Observations
 
-1. **TinyHybrid vs MobileNetV3**: TinyHybrid (94.58%) achieves comparable accuracy to MobileNetV3 (97.25%) while using **107× fewer parameters** (39K vs 4.18M) and **4.7× fewer FLOPs** (0.047 vs 0.22). This makes TinyHybrid the preferred choice for edge deployment.
+1. **Tiny: No All Attn vs MobileNetV3**: Our best TinyHybrid variant (96.49%) nearly matches MobileNetV3 (97.25%) while using **107× fewer parameters** (39K vs 4.18M) and **4.7× fewer FLOPs** (0.047 vs 0.22). This makes it the preferred choice for edge deployment.
 
-2. **TinyHybrid vs MobileViT**: Against MobileViT (98.70%), TinyHybrid trades 4.12% accuracy for **126× fewer parameters** and **30× fewer FLOPs**, offering an extreme efficiency trade-off.
+2. **Tiny: No All Attn vs MobileViT**: Against MobileViT (98.70%), our best TinyHybrid trades 2.21% accuracy for **126× fewer parameters** and **30× fewer FLOPs**, offering an extreme efficiency trade-off.
 
 3. **Hybrid vs MobileViT**: Hybrid (97.10%) nearly matches MobileViT (98.70%) while using **4.6× fewer parameters** (1.07M vs 4.93M) and **1.6× fewer FLOPs** (0.88 vs 1.42).
 
@@ -489,27 +490,6 @@ All experiments use a fixed random seed (42) for full reproducibility. Training 
 3. **Model compression**: Quantization and pruning could further reduce TinyHybrid's already minimal footprint for edge deployment.
 
 4. **Multi-task learning**: Extending to tumor segmentation or grading as auxiliary tasks.
-
----
-
-## Citation
-
-If you use this work in your research, please cite:
-
-```bibtex
-@inproceedings{tinyhybrid2026,
-  title={TinyHybrid: Efficient CNN-Transformer Hybrid Architecture for Brain Tumor Classification},
-  author={[Authors]},
-  booktitle={Proceedings of the European Conference on Artificial Intelligence (ECAI)},
-  year={2026}
-}
-```
-
----
-
-## License
-
-This project is released under the MIT License.
 
 ---
 
